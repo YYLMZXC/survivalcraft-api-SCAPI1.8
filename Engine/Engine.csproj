@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks Condition=" '$(Configuration)' == 'Release' ">net9.0;net9.0-windows;net9.0-android35.0</TargetFrameworks>
+	<TargetFramework Condition=" '$(Configuration)' == 'Debug' ">net9.0-windows</TargetFramework>
+	 <NoWarn>$(NoWarn);CA1416;1591;1573</NoWarn>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Engine</RootNamespace>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+	<RootNamespace>Engine</RootNamespace>
+	<Version>2.4.0.0</Version>
+	<WarningLevel>2</WarningLevel>
+	<AssemblyName>Engine</AssemblyName>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<PackageId>SurvivalcraftAPI.Engine</PackageId>
+	<Title>SurvivalcraftAPI.Engine</Title><!--For NuGet Package-->
+	<Version>1.8.0.0</Version><!--For NuGet Package-->
+	<PackageProjectUrl>https://gitee.com/THPRC/survivalcraft-api</PackageProjectUrl>
+	<RepositoryUrl>https://gitee.com/THPRC/survivalcraft-api</RepositoryUrl>
+	<RepositoryType>Git</RepositoryType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DefineConstants>DEBUG</DefineConstants>
+    <WarningLevel>2</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugType>none</DebugType>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net9.0-android35.0'">
+	  <SupportedOSPlatformVersion>23.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Lit.psh" Condition="'$(TargetFramework)' == 'net9.0-windows'" />
+    <EmbeddedResource Include="Resources\Lit.vsh" Condition="'$(TargetFramework)' == 'net9.0-windows'" />
+    <EmbeddedResource Include="Resources\Unlit.psh" Condition="'$(TargetFramework)' == 'net9.0-windows'" />
+    <EmbeddedResource Include="Resources\Unlit.vsh" Condition="'$(TargetFramework)' == 'net9.0-windows'" />
+    <EmbeddedResource Include="Resources\Debugfont.lst" Condition="'$(TargetFramework)' == 'net9.0-windows'" />
+    <EmbeddedResource Include="Resources\Debugfont.png" Condition="'$(TargetFramework)' == 'net9.0-windows'" />
+    <EmbeddedResource Include="Resources\icon.ico" Condition="'$(TargetFramework)' == 'net9.0-windows'" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NVorbis" Version="0.10.5" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.0" Condition="'$(TargetFramework)' == 'net9.0-windows'" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.6" /><!--An powerful and popular audio libaury-->
+	<PackageReference Include="NLayer.NAudioSupport" Version="1.4.0" /><!--MP3 support-->
+	<PackageReference Include="NAudio.Flac.Unknown.Mod" Version="1.0.3" PrivateAssets="all" /><!--Source: https://github.com/XiaofengdiZhu/NAudio.Flac/ -->
+	  <PackageReference Include="NAudio.Core" Version="2.2.1" /><!--Resolve reference confliction between NLayer.NAudioSupport and NAudio.Flac.Unknown.Mod-->
+  </ItemGroup>
+  <ItemGroup>
+	<PackageReference Condition="'$(TargetFramework)' != 'net9.0-android35.0'" Include="OpenTK" Version="3.3.3" />
+	<PackageReference Include="System.Net.Http" Version="4.3.4" />
+	<PackageReference Include="System.Private.Uri" Version="4.3.2" />
+	<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+	<PackageReference Include="Tomlyn" Version="0.17.0" />
+    <Reference Include="OpenTK-1.0.2moded" Condition="'$(TargetFramework)' == 'net9.0-android35.0'">
+      <HintPath>reference\OpenTK-1.0.2moded.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EditorConfigFiles Remove=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+  </ItemGroup>
+</Project>
